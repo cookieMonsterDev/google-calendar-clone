@@ -41,28 +41,31 @@ export const Calendar: React.FC<CalendarProps> = ({ date, view = "day" }) => {
     return setCurDate((prev) => add(prev, { months: 1 }));
   }, [curView]);
 
-  const formatDateForView = (date: Date) => {
-    if (curView === "day") {
-      return formatDate(date, "dd MMMM yyyy");
-    }
-
-    if (curView === "week") {
-      const weekStart = startOfWeek(date);
-      const weekEnd = endOfWeek(date);
-
-      const startMonth = formatDate(weekStart, "MMM");
-      const endMonth = formatDate(weekEnd, "MMM");
-      const year = formatDate(weekStart, "yyyy");
-
-      if (startMonth !== endMonth) {
-        return `${startMonth} – ${endMonth} ${year}`;
-      } else {
-        return `${startMonth} ${year}`;
+  const formatDateForView = useCallback(
+    (date: Date) => {
+      if (curView === "day") {
+        return formatDate(date, "dd MMMM yyyy");
       }
-    }
 
-    return formatDate(date, "MMMM yyyy");
-  };
+      if (curView === "week") {
+        const weekStart = startOfWeek(date);
+        const weekEnd = endOfWeek(date);
+
+        const startMonth = formatDate(weekStart, "MMM");
+        const endMonth = formatDate(weekEnd, "MMM");
+        const year = formatDate(weekStart, "yyyy");
+
+        if (startMonth !== endMonth) {
+          return `${startMonth} – ${endMonth} ${year}`;
+        } else {
+          return `${startMonth} ${year}`;
+        }
+      }
+
+      return formatDate(date, "MMMM yyyy");
+    },
+    [curView]
+  );
 
   return (
     <div id="calendar" className="w-full flex flex-col overflow-hidden">
