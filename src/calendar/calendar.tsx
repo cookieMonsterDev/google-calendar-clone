@@ -1,9 +1,12 @@
 import { useState, useCallback } from "react";
 
+import { DayView } from "./day-view";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "../utils";
 import { add, sub, endOfWeek, startOfWeek, formatDate } from "date-fns";
+
+import type { Event } from "./types";
 
 type View = "day" | "week" | "month";
 
@@ -13,7 +16,11 @@ export type CalendarProps = {
   date: string | number | Date;
 };
 
-export const Calendar: React.FC<CalendarProps> = ({ date, view = "day" }) => {
+export const Calendar: React.FC<CalendarProps> = ({
+  date,
+  events,
+  view = "day",
+}) => {
   const [curView, setCurView] = useState<View>(view);
   const [curDate, setCurDate] = useState<Date>(new Date(date));
 
@@ -68,7 +75,10 @@ export const Calendar: React.FC<CalendarProps> = ({ date, view = "day" }) => {
   );
 
   return (
-    <div id="calendar" className="w-full flex flex-col overflow-hidden">
+    <div
+      id="calendar"
+      className="w-full h-full flex-1 flex flex-col overflow-hidden"
+    >
       <section
         id="calendar-header"
         className="mb-6 w-full flex justify-between"
@@ -132,7 +142,7 @@ export const Calendar: React.FC<CalendarProps> = ({ date, view = "day" }) => {
           </button>
         </div>
       </section>
-      {curView === "day" && <>day view</>}
+      {curView === "day" && <DayView date={curDate} events={events} />}
       {curView === "week" && <>week view</>}
       {curView === "month" && <>month view</>}
     </div>
