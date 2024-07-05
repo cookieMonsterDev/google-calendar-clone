@@ -1,5 +1,3 @@
-import React from "react";
-
 import { startOfDay, differenceInMinutes, format } from "date-fns";
 
 import { Event } from "../types";
