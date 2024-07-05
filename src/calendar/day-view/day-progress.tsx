@@ -38,7 +38,7 @@ export const DayProgress: React.FC<DayProgressProps> = ({
       aria-hidden
       style={{ top }}
       aria-label="day time progress"
-      className="h-1 w-full absolute left-24 -translate-y-1/2"
+      className="h-1 w-full absolute left-24 -translate-y-1/2 z-[1000000]"
     >
       <div className="relative w-full h-full">
         <div
