@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 
 import { startOfDay, differenceInMinutes } from "date-fns";
 
+import { cn } from "../utils";
+
 const ONE_MINUTE = 60 * 1000;
 const MINUTES_IN_DAY = 24 * 60;
 
 type DayProgressProps = {
+  className?: string;
   containerHeight: number;
 };
 
 export const DayProgress: React.FC<DayProgressProps> = ({
+  className,
   containerHeight,
 }) => {
   const [top, setTop] = useState(0);
@@ -38,7 +42,10 @@ export const DayProgress: React.FC<DayProgressProps> = ({
       aria-hidden
       style={{ top }}
       aria-label="day time progress"
-      className="h-1 w-full absolute left-24 -translate-y-1/2 z-[1000000]"
+      className={cn(
+        "h-1 w-full absolute left-24 -translate-y-1/2 z-[1000000]",
+        className
+      )}
     >
       <div className="relative w-full h-full">
         <div

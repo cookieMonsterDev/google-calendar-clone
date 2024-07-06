@@ -5,7 +5,6 @@ import { Event } from "../types";
 const MINUTES_IN_DAY = 24 * 60;
 
 type DayEventProps = {
-  day: Date;
   event: Event;
   index: number;
   grouplength: number;
@@ -13,13 +12,12 @@ type DayEventProps = {
 };
 
 export const DayEvent: React.FC<DayEventProps> = ({
-  day,
   event,
   index,
   grouplength,
   containerHeight,
 }) => {
-  const today = startOfDay(day);
+  const today = startOfDay(new Date());
 
   const eventDuration = differenceInMinutes(event.end_date, event.start_date);
 
