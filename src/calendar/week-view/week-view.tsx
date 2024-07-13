@@ -1,3 +1,4 @@
+import { WeekDayView } from "./week-day-view";
 import { WeekDayLabel } from "./week-day-label";
 
 import {
@@ -9,16 +10,16 @@ import {
   eachDayOfInterval,
   eachHourOfInterval,
 } from "date-fns";
+import { createGroups } from "./group-events";
 
 import { Event } from "../types";
-import { WeekDayView } from "./week-day-view";
 
 type WeekViewProps = {
   date: Date;
   events?: Event[];
 };
 
-export const WeekView: React.FC<WeekViewProps> = ({ date }) => {
+export const WeekView: React.FC<WeekViewProps> = ({ date, events = [] }) => {
   const hours = eachHourOfInterval({
     start: startOfDay(date),
     end: endOfDay(date),
@@ -28,6 +29,8 @@ export const WeekView: React.FC<WeekViewProps> = ({ date }) => {
     start: startOfWeek(date),
     end: endOfWeek(date),
   });
+
+  const { dayGroups } = createGroups(events);
 
   return (
     <section id="calendar-day-view" className="flex-1 h-full">
@@ -62,9 +65,10 @@ export const WeekView: React.FC<WeekViewProps> = ({ date }) => {
           ))}
         </div>
         <div className="flex flex-1 h-full">
-          {days.map((day) => (
-            <WeekDayView day={day} key={day.toISOString()} />
-          ))}
+          {days.map((day) => {
+            const iso = day.toISOString();
+            return <WeekDayView day={day} key={iso} events={dayGroups[iso]} />;
+          })}
         </div>
       </div>
     </section>

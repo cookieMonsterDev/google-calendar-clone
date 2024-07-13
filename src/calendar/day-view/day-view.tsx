@@ -51,6 +51,7 @@ export const DayView: React.FC<DayViewProps> = ({ date, events = [] }) => {
           {eventGroups.map((group) =>
             group.map((event, index) => (
               <DayEvent
+                day={date}
                 event={event}
                 index={index}
                 key={event.id}

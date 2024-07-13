@@ -4,7 +4,7 @@ import { Event } from "../types";
 
 const MINUTES_IN_DAY = 24 * 60;
 
-type DayEventProps = {
+type WeekDayEventProps = {
   day: Date;
   event: Event;
   index: number;
@@ -12,7 +12,7 @@ type DayEventProps = {
   containerHeight: number;
 };
 
-export const DayEvent: React.FC<DayEventProps> = ({
+export const WeekDayEvent: React.FC<WeekDayEventProps> = ({
   day,
   event,
   index,
@@ -43,7 +43,7 @@ export const DayEvent: React.FC<DayEventProps> = ({
       height,
       padding: "2px 8px",
       zIndex: 100 + index,
-      width: `calc((100% - 96px) * ${widthPercentage})`,
+      width: `calc(100% * ${widthPercentage})`,
     };
 
     if (isLast) {
@@ -52,7 +52,7 @@ export const DayEvent: React.FC<DayEventProps> = ({
 
     return {
       ...styles,
-      left: `calc(100px + 100% * ${(1 / grouplength) * index})`,
+      left: `calc(100% * ${(1 / grouplength) * index})`,
     };
   };
 
