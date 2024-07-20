@@ -19,16 +19,12 @@ export const WeekDayEvent: React.FC<WeekDayEventProps> = ({
   grouplength,
   containerHeight,
 }) => {
-  const today = startOfDay(day);
-
-  const eventDuration = differenceInMinutes(event.end_date, event.start_date);
-
   const generateBoxStyle = () => {
+    const today = startOfDay(day);
     const minutesPassed = differenceInMinutes(event.start_date, today);
+    const eventDuration = differenceInMinutes(event.end_date, event.start_date);
 
-    const percentage = minutesPassed / MINUTES_IN_DAY;
-
-    const top = percentage * containerHeight;
+    const top = (minutesPassed / MINUTES_IN_DAY) * containerHeight;
     const height = (eventDuration / MINUTES_IN_DAY) * containerHeight;
 
     const isLast = index === grouplength - 1;

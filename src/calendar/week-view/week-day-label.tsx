@@ -23,7 +23,6 @@ export const WeekDayLabel: React.FC<WeekDayLabelProps> = ({ day }) => {
       >
         <p className="leading-[44px]">{format(day, "d")}</p>
       </div>
-      <div className="w-full h-6 border-l" />
     </div>
   );
 };

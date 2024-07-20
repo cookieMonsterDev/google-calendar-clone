@@ -1,6 +1,15 @@
-import { add, isAfter, isBefore, isSameDay, isWithinInterval } from "date-fns";
+import {
+  add,
+  isAfter,
+  isBefore,
+  isSameDay,
+  isWithinInterval,
+  differenceInMilliseconds,
+} from "date-fns";
 
 import type { Event } from "../types";
+
+const MILLISECONDS_IN_DAY = 86399999;
 
 export type GroupedEvents = {
   allDayEvents: Event[];
@@ -49,12 +58,15 @@ export const groupEvents = (date: Date, events: Event[]): GroupedEvents => {
 
   const [allDayEvents, thisDayEvents]: Event[][] = eventsPresentToday.reduce(
     (acc: Event[][], cur) => {
-      if (isBefore(cur.start_date, date) && isAfter(cur.end_date, date)) {
-        acc[0].push(cur);
-      }
+      const { end_date, start_date } = cur;
 
-      if (isSameDay(cur.start_date, date) && isSameDay(cur.end_date, date)) {
+      const same = isSameDay(start_date, end_date);
+      const difference = differenceInMilliseconds(end_date, start_date);
+
+      if (same && difference < MILLISECONDS_IN_DAY) {
         acc[1].push(cur);
+      } else {
+        acc[0].push(cur);
       }
 
       return acc;
