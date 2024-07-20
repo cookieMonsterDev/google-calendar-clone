@@ -1,4 +1,11 @@
-import { add, sub, endOfToday, startOfToday } from "date-fns";
+import {
+  add,
+  sub,
+  endOfToday,
+  startOfToday,
+  startOfWeek,
+  endOfWeek,
+} from "date-fns";
 
 import type { Event } from "./calendar";
 
@@ -34,15 +41,9 @@ export const eventsMock: Event[] = [
     title: "Fifths",
   },
   {
-    id: "6",
-    start_date: startOfToday(),
-    end_date: add(endOfToday(), { seconds: 1 }),
-    title: "All day event",
-  },
-  {
     id: "9",
-    start_date: add(startOfToday(), { days: 1, hours: 1 }),
-    end_date: add(startOfToday(), { days: 1, hours: 1, minutes: 30 }),
+    start_date: add(startOfToday(), { days: 1, hours: 6 }),
+    end_date: add(startOfToday(), { days: 1, hours: 6, minutes: 30 }),
     title: "Tomorrow event",
   },
   {
@@ -52,9 +53,39 @@ export const eventsMock: Event[] = [
     title: "Yesterday event",
   },
   {
+    id: "6",
+    start_date: startOfToday(),
+    end_date: endOfToday(),
+    title: "All day event",
+  },
+  {
     id: "11",
-    start_date: sub(startOfToday(), { days: 2, hours: 4 }),
-    end_date: add(endOfToday(), { days: 1, minutes: 30 }),
+    start_date: startOfWeek(new Date()),
+    end_date: endOfWeek(new Date()),
     title: "Week event",
+  },
+  {
+    id: "12",
+    start_date: sub(startOfToday(), { days: 3 }),
+    end_date: sub(endOfToday(), { days: 1 }),
+    title: "3 days event 1",
+  },
+  {
+    id: "13",
+    start_date: sub(startOfToday(), { days: 4 }),
+    end_date: sub(endOfToday(), { days: 2 }),
+    title: "3 days event 2",
+  },
+  {
+    id: "14",
+    start_date: add(startOfToday(), { days: 1 }),
+    end_date: add(endOfToday(), { days: 2 }),
+    title: "2 days event",
+  },
+  {
+    id: "15",
+    start_date: sub(startOfWeek(new Date()), { days: 2 }),
+    end_date: endOfWeek(new Date()),
+    title: "More than one week event",
   },
 ];

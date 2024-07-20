@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 import { DayEvent } from "./day-event";
-import { DayProgress } from "./day-progress";
+import { DayProgress } from "../day-progress";
+import { AllDayEvent } from "./all-day-event";
 
 import {
   format,
@@ -12,10 +13,11 @@ import {
 } from "date-fns";
 import { groupEvents } from "./group-events";
 
-import type { Event } from "../types";
-import { AllDayEvent } from "./all-day-event";
+import { cn } from "../../utils";
 
-export type DayViewProps = {
+import type { Event } from "../types";
+
+type DayViewProps = {
   date: Date;
   events?: Event[];
 };
@@ -35,7 +37,7 @@ export const DayView: React.FC<DayViewProps> = ({ date, events = [] }) => {
   return (
     <section id="calendar-day-view" className="flex-1 h-full">
       <div className="border-b flex scrollbar-gutter-stable">
-        <div className="w-24 h-14 flex justify-center items-center">
+        <div className="min-w-24 h-14 flex justify-center items-center">
           <span className="text-xs">{format(new Date(), "z")}</span>
         </div>
         <div className="flex flex-col flex-1 justify-center items-center border-l gap-[1px]">
@@ -44,7 +46,7 @@ export const DayView: React.FC<DayViewProps> = ({ date, events = [] }) => {
           ))}
         </div>
       </div>
-      <div className="flex-1 max-h-full overflow-y-scroll pb-28">
+      <div className="flex-1 max-h-full overflow-y-scroll pb-36">
         <div className="relative" ref={(ref) => setRef(ref)}>
           {eventGroups.map((group) =>
             group.map((event, index) => (
@@ -68,7 +70,12 @@ export const DayView: React.FC<DayViewProps> = ({ date, events = [] }) => {
                   {index === 0 ? "" : format(time, "h a")}
                 </time>
               </div>
-              <div className="flex-1 relative border-b border-l" />
+              <div
+                className={cn(
+                  "flex-1 relative border-l",
+                  index !== hours.length - 1 && "border-b"
+                )}
+              />
             </div>
           ))}
           {isDayToday && (
