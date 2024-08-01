@@ -1,8 +1,9 @@
 import { MonthDayView } from "./month-day-view";
-import { MonthWeekEvents } from "./month-week-events";
+import { MonthWeekEventsView } from "./month-week-events-view";
 
 import { cn } from "../../utils";
 import { cva } from "class-variance-authority";
+import { createWeekGroups } from "../week-view/group-events";
 import { format, isToday, isSameDay, startOfMonth } from "date-fns";
 
 import { Event } from "../types";
@@ -39,6 +40,10 @@ export const MonthWeekView: React.FC<MonthWeekViewProps> = ({
   week_events = [],
   week_day_events = {},
 }) => {
+  const groups = createWeekGroups(week_events, week[3]);
+  const limitedGroups = groups.slice(0, 5);
+  const restEvents = groups.slice(5).flat(1);
+
   return (
     <div className="w-full h-full relative">
       <div className="w-full h-full flex">
@@ -64,13 +69,20 @@ export const MonthWeekView: React.FC<MonthWeekViewProps> = ({
         })}
       </div>
       <div className="mt-10 mb-6 absolute inset-0 space-y-1 overflow-hidden">
-        <MonthWeekEvents />
-
+        <MonthWeekEventsView date={week[3]} groups={limitedGroups} />
         <div className="min-h-6 flex">
           {week.map((day) => {
             const dayKey = day.toISOString();
             const events = week_day_events[dayKey];
-            return <MonthDayView key={dayKey} events={events} />;
+            return (
+              <MonthDayView
+                day={day}
+                key={dayKey}
+                events={events}
+                restEvents={restEvents}
+                weekEventsShown={limitedGroups.length}
+              />
+            );
           })}
         </div>
       </div>

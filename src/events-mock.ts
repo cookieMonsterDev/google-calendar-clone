@@ -46,7 +46,7 @@ export const eventsMock: Event[] = [
     id: "9",
     start_date: add(startOfToday(), { days: 1, hours: 6 }),
     end_date: add(startOfToday(), { days: 1, hours: 6, minutes: 30 }),
-    title: "Tomorrow event",
+    title: "Tomorrow event 1",
   },
   {
     id: "10",
@@ -58,7 +58,7 @@ export const eventsMock: Event[] = [
     id: "6",
     start_date: startOfToday(),
     end_date: endOfToday(),
-    title: "All day event",
+    title: "All day event 1",
   },
   {
     id: "11",
@@ -95,5 +95,25 @@ export const eventsMock: Event[] = [
     start_date: startOfMonth(new Date()),
     end_date: endOfMonth(new Date()),
     title: "Month event",
+  },
+  {
+    id: "17",
+    start_date: startOfToday(),
+    end_date: endOfToday(),
+    title: "All day event 2",
+  },
+
+  {
+    id: "18",
+    start_date: startOfToday(),
+    end_date: endOfToday(),
+    title: "All day event 3",
+  },
+
+  {
+    id: "19",
+    start_date: add(startOfToday(), { days: 1, hours: 6 }),
+    end_date: add(startOfToday(), { days: 1, hours: 6, minutes: 30 }),
+    title: "Tomorrow event 2",
   },
 ];
