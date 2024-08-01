@@ -85,8 +85,10 @@ export const createWeekGroups = (
 
     const isEnd = isSameWeek(end_date, date);
     const isStart = isSameWeek(start_date, date);
+    const isMonth =
+      isBefore(start_date, weekStart) && isAfter(end_date, weekEnd);
 
-    if (!(isStart || isEnd)) continue;
+    if (!(isStart || isEnd || isMonth)) continue;
 
     const display_start_date = isBefore(start_date, weekStart)
       ? weekStart
