@@ -2,13 +2,15 @@ import { MonthWeekView } from "./month-week-view";
 
 import {
   format,
+  endOfDay,
   endOfWeek,
   endOfMonth,
+  startOfDay,
   startOfWeek,
   startOfMonth,
   eachDayOfInterval,
 } from "date-fns";
-import { createWeekGroups } from "./group-events";
+import { createMonthGroups } from "./group-events";
 
 import { Event } from "../types";
 
@@ -35,7 +37,7 @@ export const MonthView: React.FC<MonthViewProps> = ({ date, events = [] }) => {
     return acc;
   }, [] as Date[][]);
 
-  const groups = createWeekGroups(events, weeks);
+  const groups = createMonthGroups(events, weeks);
 
   return (
     <section id="calendar-month-view" className="flex-1 flex flex-col">
@@ -52,9 +54,15 @@ export const MonthView: React.FC<MonthViewProps> = ({ date, events = [] }) => {
         ))}
       </div>
       <div className="flex-1 flex flex-col">
-        {weeks.map((week) => (
-          <MonthWeekView week={week} key={JSON.stringify(week)} />
-        ))}
+        {weeks.map((week) => {
+          const weekEndDate = endOfDay(week[week.length - 1]);
+          const weekStartDate = startOfDay(week[0]);
+          const weekKey =
+            weekStartDate.toISOString() + "-" + weekEndDate.toISOString();
+          const props = { week, ...groups[weekKey] };
+
+          return <MonthWeekView {...props} key={weekKey} />;
+        })}
       </div>
     </section>
   );

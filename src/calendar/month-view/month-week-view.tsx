@@ -1,10 +1,17 @@
+import { MonthDayView } from "./month-day-view";
+import { MonthWeekEvents } from "./month-week-events";
+
 import { cn } from "../../utils";
 import { cva } from "class-variance-authority";
 import { format, isToday, isSameDay, startOfMonth } from "date-fns";
 
+import { Event } from "../types";
+import { WeekEvent } from "./group-events";
+
 type MonthWeekViewProps = {
   week: Date[];
-  events?: Event[];
+  week_events: WeekEvent[];
+  week_day_events: Record<string, Event[]>;
 };
 
 const dayLabelVariants = cva(
@@ -29,7 +36,8 @@ const dayLabelVariants = cva(
 
 export const MonthWeekView: React.FC<MonthWeekViewProps> = ({
   week,
-  // events = [],
+  week_events = [],
+  week_day_events = {},
 }) => {
   return (
     <div className="w-full h-full relative">
@@ -55,62 +63,14 @@ export const MonthWeekView: React.FC<MonthWeekViewProps> = ({
           );
         })}
       </div>
-      <div className="my-8 absolute inset-0 space-y-1 overflow-hidden">
-        <div className="h-6 bg-blue-400 ">
-          <h1>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
-            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
-            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
-            facere.
-          </h1>
-        </div>
+      <div className="mt-10 mb-6 absolute inset-0 space-y-1 overflow-hidden">
+        <MonthWeekEvents />
 
-        <div className="h-6 bg-blue-400 ">
-          <h1>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
-            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
-            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
-            facere.
-          </h1>
-        </div>
-
-        <div className="h-6 bg-blue-400 ">
-          <h1>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
-            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
-            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
-            facere.
-          </h1>
-        </div>
-
-        <div className="h-6 bg-blue-400 ">
-          <h1>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
-            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
-            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
-            facere.
-          </h1>
-        </div>
-
-        <div className="h-6 bg-blue-400 ">
-          <h1>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
-            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
-            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
-            facere.
-          </h1>
-        </div>
-
-        <div className="h-6 flex">
+        <div className="min-h-6 flex">
           {week.map((day) => {
-            return (
-              <div
-                className="pl-4 pr-6 flex-1 flex flex-col"
-                key={day.toISOString()}
-              >
-                <h2>7 more</h2>
-              </div>
-            );
+            const dayKey = day.toISOString();
+            const events = week_day_events[dayKey];
+            return <MonthDayView key={dayKey} events={events} />;
           })}
         </div>
       </div>
