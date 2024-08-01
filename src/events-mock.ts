@@ -1,10 +1,12 @@
 import {
   add,
   sub,
-  endOfToday,
-  startOfToday,
-  startOfWeek,
   endOfWeek,
+  endOfMonth,
+  endOfToday,
+  startOfWeek,
+  startOfToday,
+  startOfMonth,
 } from "date-fns";
 
 import type { Event } from "./calendar";
@@ -87,5 +89,11 @@ export const eventsMock: Event[] = [
     start_date: sub(startOfWeek(new Date()), { days: 2 }),
     end_date: endOfWeek(new Date()),
     title: "More than one week event",
+  },
+  {
+    id: "16",
+    start_date: startOfMonth(new Date()),
+    end_date: endOfMonth(new Date()),
+    title: "Month event",
   },
 ];

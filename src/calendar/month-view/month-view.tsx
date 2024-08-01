@@ -8,6 +8,7 @@ import {
   startOfMonth,
   eachDayOfInterval,
 } from "date-fns";
+import { createWeekGroups } from "./group-events";
 
 import { Event } from "../types";
 
@@ -16,10 +17,7 @@ type MonthViewProps = {
   events?: Event[];
 };
 
-export const MonthView: React.FC<MonthViewProps> = ({
-  date,
-  // events = []
-}) => {
+export const MonthView: React.FC<MonthViewProps> = ({ date, events = [] }) => {
   const days = eachDayOfInterval({
     start: startOfWeek(date),
     end: endOfWeek(date),
@@ -37,11 +35,16 @@ export const MonthView: React.FC<MonthViewProps> = ({
     return acc;
   }, [] as Date[][]);
 
+  const groups = createWeekGroups(events, weeks);
+
   return (
     <section id="calendar-month-view" className="flex-1 flex flex-col">
       <div className="w-full flex">
         {days.map((day) => (
-          <div className="flex-1 flex justify-center border-t border-l last:border-r">
+          <div
+            key={day.toISOString()}
+            className="flex-1 flex justify-center border-t border-l last:border-r"
+          >
             <span className="mt-2 text-sm font-semibold text-gray-500">
               {format(day, "iii")}
             </span>

@@ -32,22 +32,88 @@ export const MonthWeekView: React.FC<MonthWeekViewProps> = ({
   // events = [],
 }) => {
   return (
-    <div className="w-full h-full flex">
-      {week.map((day) => {
-        const isStartOfMonth = isSameDay(day, startOfMonth(day));
+    <div className="w-full h-full relative">
+      <div className="w-full h-full flex">
+        {week.map((day) => {
+          const isStartOfMonth = isSameDay(day, startOfMonth(day));
 
-        const variant = isToday(day) ? "today" : "default";
-        const size = isStartOfMonth ? "startOfMonth" : "default";
-        const text = isStartOfMonth ? format(day, "d, MMM") : format(day, "d");
+          const variant = isToday(day) ? "today" : "default";
+          const size = isStartOfMonth ? "startOfMonth" : "default";
+          const text = isStartOfMonth
+            ? format(day, "d, MMM")
+            : format(day, "d");
 
-        const className = cn(dayLabelVariants({ variant, size }));
+          const className = cn(dayLabelVariants({ variant, size }));
 
-        return (
-          <div className="flex-1 flex flex-col items-center border-b border-l last:border-r">
-            <h2 className={className}>{text}</h2>
-          </div>
-        );
-      })}
+          return (
+            <div
+              key={"day-label-" + day.toISOString()}
+              className="flex-1 flex flex-col items-center border-b border-l last:border-r"
+            >
+              <h2 className={className}>{text}</h2>
+            </div>
+          );
+        })}
+      </div>
+      <div className="my-8 absolute inset-0 space-y-1 overflow-hidden">
+        <div className="h-6 bg-blue-400 ">
+          <h1>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
+            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
+            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
+            facere.
+          </h1>
+        </div>
+
+        <div className="h-6 bg-blue-400 ">
+          <h1>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
+            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
+            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
+            facere.
+          </h1>
+        </div>
+
+        <div className="h-6 bg-blue-400 ">
+          <h1>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
+            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
+            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
+            facere.
+          </h1>
+        </div>
+
+        <div className="h-6 bg-blue-400 ">
+          <h1>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
+            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
+            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
+            facere.
+          </h1>
+        </div>
+
+        <div className="h-6 bg-blue-400 ">
+          <h1>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum
+            deleniti, laudantium, voluptatibus vel fugit in nostrum rerum
+            possimus id ut, molestiae non sit sunt! Optio labore ad magni eum
+            facere.
+          </h1>
+        </div>
+
+        <div className="h-6 flex">
+          {week.map((day) => {
+            return (
+              <div
+                className="pl-4 pr-6 flex-1 flex flex-col"
+                key={day.toISOString()}
+              >
+                <h2>7 more</h2>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
