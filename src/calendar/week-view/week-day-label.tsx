@@ -12,7 +12,7 @@ export const WeekDayLabel: React.FC<WeekDayLabelProps> = ({ day }) => {
   return (
     <div className="flex-1 min-w-36 flex flex-col items-center">
       <span aria-hidden className="text-md text-gray-400">
-        {format(day, "EEEEEE")}
+        {format(day, "iii")}
       </span>
       <div
         aria-label={day.toDateString()}

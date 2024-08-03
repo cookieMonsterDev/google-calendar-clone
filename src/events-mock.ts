@@ -1,10 +1,12 @@
 import {
   add,
   sub,
-  endOfToday,
-  startOfToday,
-  startOfWeek,
   endOfWeek,
+  endOfMonth,
+  endOfToday,
+  startOfWeek,
+  startOfToday,
+  startOfMonth,
 } from "date-fns";
 
 import type { Event } from "./calendar";
@@ -44,7 +46,7 @@ export const eventsMock: Event[] = [
     id: "9",
     start_date: add(startOfToday(), { days: 1, hours: 6 }),
     end_date: add(startOfToday(), { days: 1, hours: 6, minutes: 30 }),
-    title: "Tomorrow event",
+    title: "Tomorrow event 1",
   },
   {
     id: "10",
@@ -56,7 +58,7 @@ export const eventsMock: Event[] = [
     id: "6",
     start_date: startOfToday(),
     end_date: endOfToday(),
-    title: "All day event",
+    title: "All day event 1",
   },
   {
     id: "11",
@@ -87,5 +89,67 @@ export const eventsMock: Event[] = [
     start_date: sub(startOfWeek(new Date()), { days: 2 }),
     end_date: endOfWeek(new Date()),
     title: "More than one week event",
+  },
+  {
+    id: "16",
+    start_date: startOfMonth(new Date()),
+    end_date: endOfMonth(new Date()),
+    title: "Month event",
+  },
+  {
+    id: "17",
+    start_date: startOfToday(),
+    end_date: endOfToday(),
+    title: "All day event 2",
+  },
+
+  {
+    id: "18",
+    start_date: startOfToday(),
+    end_date: endOfToday(),
+    title: "All day event 3",
+  },
+
+  {
+    id: "19",
+    start_date: add(startOfToday(), { days: 1, hours: 6 }),
+    end_date: add(startOfToday(), { days: 1, hours: 6, minutes: 30 }),
+    title: "Tomorrow event 2",
+  },
+  {
+    id: "20",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 1",
+  },
+  {
+    id: "21",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 2",
+  },
+  {
+    id: "22",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 3",
+  },
+  {
+    id: "23",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 4",
+  },
+  {
+    id: "24",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 5",
+  },
+  {
+    id: "25",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 6",
   },
 ];

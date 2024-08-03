@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 
 import { DayView } from "./day-view";
 import { WeekView } from "./week-view";
+import { MonthView } from "./month-view";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "../utils";
@@ -20,7 +21,7 @@ export type CalendarProps = {
 export const Calendar: React.FC<CalendarProps> = ({
   date,
   events,
-  view = "week",
+  view = "month",
 }) => {
   const [curView, setCurView] = useState<View>(view);
   const [curDate, setCurDate] = useState<Date>(new Date(date));
@@ -145,7 +146,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       </section>
       {curView === "day" && <DayView date={curDate} events={events} />}
       {curView === "week" && <WeekView date={curDate} events={events} />}
-      {curView === "month" && <>month view</>}
+      {curView === "month" && <MonthView date={curDate} events={events} />}
     </div>
   );
 };
