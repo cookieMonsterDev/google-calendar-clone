@@ -116,4 +116,40 @@ export const eventsMock: Event[] = [
     end_date: add(startOfToday(), { days: 1, hours: 6, minutes: 30 }),
     title: "Tomorrow event 2",
   },
+  {
+    id: "20",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 1",
+  },
+  {
+    id: "21",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 2",
+  },
+  {
+    id: "22",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 3",
+  },
+  {
+    id: "23",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 4",
+  },
+  {
+    id: "24",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 5",
+  },
+  {
+    id: "25",
+    start_date: add(startOfToday(), { days: 7 }),
+    end_date: add(startOfToday(), { days: 7 }),
+    title: "Next week 6",
+  },
 ];

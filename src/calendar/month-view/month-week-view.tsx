@@ -68,7 +68,7 @@ export const MonthWeekView: React.FC<MonthWeekViewProps> = ({
           );
         })}
       </div>
-      <div className="mt-10 mb-6 absolute inset-0 space-y-1 overflow-hidden">
+      <div className="mt-10 mb-5 absolute inset-0 space-y-1 overflow-hidden">
         <MonthWeekEventsView date={week[3]} groups={limitedGroups} />
         <div className="min-h-6 flex">
           {week.map((day) => {
